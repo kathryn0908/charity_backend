@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :favorites
+  resources :favorites, only: [:index, :update, :show, :create, :destroy]
   resources :donations, only: [:index, :update, :show, :create, :destroy]
   resources :users, only: [:index, :update, :show, :create, :destroy]
   resources :charities, only: [:index, :update, :show, :create, :destroy]
