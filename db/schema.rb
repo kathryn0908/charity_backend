@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_143318) do
+ActiveRecord::Schema.define(version: 2020_06_16_222204) do
 
   create_table "charities", force: :cascade do |t|
     t.string "charity_name"
@@ -23,4 +23,34 @@ ActiveRecord::Schema.define(version: 2020_06_15_143318) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "donations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "charity_id", null: false
+    t.float "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["charity_id"], name: "index_donations_on_charity_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "charity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["charity_id"], name: "index_favorites_on_charity_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "donations", "charities"
+  add_foreign_key "donations", "users"
+  add_foreign_key "favorites", "charities"
+  add_foreign_key "favorites", "users"
 end

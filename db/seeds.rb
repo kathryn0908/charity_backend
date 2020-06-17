@@ -13,15 +13,17 @@ Charity.destroy_all
     response = RestClient.get(charities_url)
     charity_data = JSON.parse(response)
     charity_info = charity_data["data"]
-
+    # byebug
+    
+    
 
 
 charity_info.each do |charity|
     Charity.create(
-        charity_name: charity["charityName"],
+        charity_name: charity["charityName"].titleize,
         url: charity["url"],
         donation_url: charity["donationUrl"],
-        city: charity["city"],
+        city: charity["city"].titleize,
         state: charity["state"],
         category: charity["category"]
     )
