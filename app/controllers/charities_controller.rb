@@ -5,7 +5,7 @@ class CharitiesController < ApplicationController
 
     def index
         @charities = Charity.all
-        render json: @charities
+        render json: @charities, include: [:donations]
     end
 
     def show 

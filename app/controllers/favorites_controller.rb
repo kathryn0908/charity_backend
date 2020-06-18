@@ -4,11 +4,12 @@ class FavoritesController < ApplicationController
 
     def index
         @favorites = Favorite.all
-        render json: @favorites, include: :charity
+        render :json => @favorites.to_json(:include => { 
+            :charity => { :include => :donations } })
     end
 
     def show 
-        render json: @favorites
+        render json: @favorites, include: :charity
     end
 
     def create
